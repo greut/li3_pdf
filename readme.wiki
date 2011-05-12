@@ -1,0 +1,69 @@
+`li3_pdf` is a simple way of generating PDF from an HTML input. We first started with **DOM PDF** but that one was very slow so **wkthmltopdf** was added and is recommanded.
+
+##Installation
+
+Put `li3_pdf` into your `libraries` directory.
+
+{{{
+Libraries::add('li3_pdf');
+}}}
+
+## Backends
+
+Two backends exist:
+
+ - [DOM PDF](http://code.google.com/p/dompdf/)
+ - [wkthml to pdf](https://code.google.com/p/wkhtmltopdf/)
+
+### DOM PDF
+
+DOMPDF works entirely in PHP but is slow and have a limited support of CSS.
+
+You can put it along-side `li3_pdf`.
+
+### Wkhtmltopdf
+
+wkhtmltopdf relies on a binary executable that renders the HTML using the
+[Webkit engine](http://webkit.org/) and Qt. It's fast and reliable.
+
+The bin `wkhtmltopdf` should be in the current path.
+
+##Configuration
+
+{{{
+use li3_pdf\extensions\Pdf;
+
+Pdf::config('default', array(
+	'adapter' => 'Wkhtmltopdf',
+    // options
+    'command' => 'C:\wkhtmltopdf\wkhtmltopdf.exe',
+    'page_size' => 'A5',
+    'orientation' => 'Landscape',
+));
+
+Pdf::config('default', array(
+	'adapter' => 'Dompdf',
+    // options
+    'orientation' => 'landscape'
+));
+}}}
+
+##Usage
+
+{{{
+use li3_pdf\extensions\Pdf;
+
+$pdf = Pdf::adapter('default');
+
+header('Content-type: application/pdf');
+echo $pdf->generate($html);
+}}}
+
+##Media
+
+You can also rely on the `Media::type` to generate PDF. Check the `media.php`
+file into `li3_pdf/config/bootstrap`.
+
+##Authors
+
+- Yoan Blanc <<yoan@dosimple.ch>>
