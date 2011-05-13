@@ -35,16 +35,16 @@ use li3_pdf\extensions\Pdf;
 
 Pdf::config('default', array(
 	'adapter' => 'Wkhtmltopdf',
-    // options
-    'command' => 'C:\wkhtmltopdf\wkhtmltopdf.exe',
-    'page_size' => 'A5',
-    'orientation' => 'Landscape',
+	// options
+	'command' => 'C:\wkhtmltopdf\wkhtmltopdf.exe',
+	'page_size' => 'A5',
+	'orientation' => 'Landscape',
 ));
 
 Pdf::config('default', array(
 	'adapter' => 'Dompdf',
-    // options
-    'orientation' => 'landscape'
+	// options
+	'orientation' => 'landscape'
 ));
 }}}
 
