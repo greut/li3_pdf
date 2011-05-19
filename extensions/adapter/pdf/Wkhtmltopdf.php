@@ -62,15 +62,12 @@ class Wkhtmltopdf extends \lithium\core\Object
 		$filename = LITHIUM_APP_PATH . '/resources/tmp/wk'.time().'.html';
 		file_put_contents($filename, $html);
 
-		$proc = proc_open(
-			$this->command($filename).' -',
-			array(
-				array('pipe', 'r'), // stdin
-				array('pipe', 'w'), // stdout
-				array('pipe', 'w'), // stderr
-			),
-			$pipes
+		$io = array(
+			array('pipe', 'r'), // stdin
+			array('pipe', 'w'), // stdout
+			array('pipe', 'w'), // stderr
 		);
+		$proc = proc_open($this->command($filename).' -', $io, $pipes);
 
 		fwrite($pipes[0], $input);
 		fclose($pipes[0]);

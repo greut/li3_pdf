@@ -8,7 +8,9 @@ class DompdfTest extends \lithium\test\Unit
 {
 	function test_generate()
 	{
-		$dp = new Dompdf();
+		$dp = new Dompdf(array(
+			'pdflib' => 'derp derp',
+		));
         $html = <<<EOS
 <!DOCTYPE html>
 <html>
