@@ -24,5 +24,12 @@ namespace li3_pdf\extensions;
  */
 class Pdf extends \lithium\core\Adaptable
 {
+	/**
+	 * To be re-defined in sub-classes.
+	 *
+	 * @var object `Collection` of configurations, indexed by name.
+	 */
+	protected static $_configurations = array();
+
 	protected static $_adapters = 'adapter.pdf';
 }

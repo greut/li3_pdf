@@ -8,7 +8,7 @@ namespace li3_pdf\extensions;
  */
 abstract class Writer extends \lithium\core\Object
 {
-	protected $_config = 'default';
+	protected $_adapter = 'default';
 
 	protected $_view;
 
@@ -17,7 +17,12 @@ abstract class Writer extends \lithium\core\Object
 		'message' => 'lithium\\g11n\\Message',
 	);
 
-	protected $_autoConfig = array('classes' => 'merge', 'config');
+	protected $_paths = array(
+		'template' => '{:library}/views/{:controller}/{:template}.{:type}.php',
+		'layout' => '{:library}/views/layouts/{:layout}.{:type}.php',
+	);
+
+	protected $_autoConfig = array('classes' => 'merge', 'adapter', 'paths');
 
 	/**
 	 * Request data
@@ -44,6 +49,7 @@ abstract class Writer extends \lithium\core\Object
 			'template' => 'index',
 			'layout' => 'default',
 			'type' => 'pdf',
+			'pdf' => true
 		);
 
 		return $this->_render($data, $options);
@@ -54,10 +60,7 @@ abstract class Writer extends \lithium\core\Object
 			$message = $this->_classes['message'];
 
 			$this->_view = $this->_instance('view', array(
-				'paths' => array(
-					'template' => '{:library}/views/{:controller}/{:template}.{:type}.php',
-					'layout' => '{:library}/views/layouts/{:layout}.{:type}.php',
-				),
+				'paths' => $this->_paths,
 				'outputFilters' => $message::aliases(),
 			));
 		}
@@ -65,9 +68,13 @@ abstract class Writer extends \lithium\core\Object
 	}
 
 	protected function _render(array $data, array $options=array()) {
-		$pdf = Pdf::adapter($this->_config);
 		$view = $this->_view();
 		$html = $view->render('all', $data, $options);
-		return $pdf->generate($html);
+		if ($options['pdf']) {
+			$pdf = Pdf::adapter($this->_adapter);
+			return $pdf->generate($html);
+		} else {
+			return $html;
+		}
 	}
 }
