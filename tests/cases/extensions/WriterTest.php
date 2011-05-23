@@ -11,6 +11,7 @@ use li3_pdf\extensions\Pdf;
  */
 class HelloPdf extends \li3_pdf\extensions\Writer
 {
+	protected $_adapter = 'test';
 }
 
 class WriterTest extends \lithium\test\Unit
@@ -61,4 +62,11 @@ class WriterTest extends \lithium\test\Unit
         $this->assertEqual('%PDF-1.4', substr($output, 0, 8));
 		$this->assertEqual('layout', $this->params['options']['layout']);
 	}
+
+	function test_create_html()
+	{
+		$output = $this->hello->render(array('data' => array('title' => 'Test'), 'pdf' => false));
+        $this->assertEqual('Hello World!', $output);
+	}
+
 }

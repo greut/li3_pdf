@@ -49,7 +49,7 @@ abstract class Writer extends \lithium\core\Object
 			'template' => 'index',
 			'layout' => 'default',
 			'type' => 'pdf',
-			'pdf' => true
+			'pdf' => true,
 		);
 
 		return $this->_render($data, $options);
