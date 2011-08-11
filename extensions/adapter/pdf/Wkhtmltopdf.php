@@ -56,6 +56,7 @@ class Wkhtmltopdf extends \lithium\core\Object
 		'margin_bottom',
 		'margin_left',
 		'command',
+		'dpi'
 	);
 
 	function generate($html, $input='') {
@@ -97,6 +98,7 @@ class Wkhtmltopdf extends \lithium\core\Object
 			'margin_right'  => '-R',
 			'margin_bottom' => '-B',
 			'margin_left'   => '-L',
+			'dpi'           => '--dpi',
 		);
 		$cmd = $this->_command;
 
