@@ -36,7 +36,7 @@ class Wkhtmltopdf extends \lithium\core\Object
 	 */
 	protected $_margin_right;
 	/**
-	 * margin-Bottom
+	 * margin-bottom
 	 *
 	 * @var integer
 	 */
@@ -47,6 +47,12 @@ class Wkhtmltopdf extends \lithium\core\Object
 	 * @var integer
 	 */
 	protected $_margin_left;
+	/**
+	 * Dots-per-inch
+	 *
+	 * @var integer
+	 */
+	protected $_dpi;
 
 	protected $_autoConfig = array(
 		'orientation',
